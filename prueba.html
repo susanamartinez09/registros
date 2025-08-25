@@ -1,0 +1,27 @@
+<form id="patientForm">
+    <input type="text" name="nombre1" placeholder="Nombre 1" required>
+    <input type="text" name="nombre2" placeholder="Nombre 2">
+    <input type="text" name="apellido1" placeholder="Apellido 1" required>
+    <input type="text" name="apellido2" placeholder="Apellido 2">
+    <input type="email" name="correo" placeholder="Correo" required>
+    <button type="submit">Registrar Paciente</button>
+</form>
+
+<script>
+document.getElementById('patientForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    fetch('api/pacientes', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.success);
+        } else {
+            alert(data.error);
+        }
+    });
+});
+</script>
